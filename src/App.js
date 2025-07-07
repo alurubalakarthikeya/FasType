@@ -6,6 +6,7 @@ import { MdMenu } from 'react-icons/md';
 import TypingBox from './components/TypingBox';
 import Timer from './components/Timer';
 import Stats from './components/Stats';
+import { MdAccountCircle, MdNotifications } from 'react-icons/md';
 function App() {
   const [start, setStart] = useState(false);
   const [done, setDone] = useState(false);
@@ -25,11 +26,11 @@ function App() {
         <h2>FasType <MdKeyboard /></h2>
         <MdMenu className="menu-icon" />
         <ul>
-          <li>Current: </li>
-          <li>Highest: </li>
-          <li>Average: </li>
+            <li><MdNotifications className="notification-icon" /></li>
+            <li><MdAccountCircle className="account-icon" /></li>
         </ul>
       </nav>
+      <div className="content">
       {!done && (
         <>
           <Timer start={start} onTimeEnd={handleTimeEnd} />
@@ -37,6 +38,7 @@ function App() {
         </>
       )}
       {done && <Stats typedText={typedText} duration={60} />}
+      </div>
     </div>
   );
 }
