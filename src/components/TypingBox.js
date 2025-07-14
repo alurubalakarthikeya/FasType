@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
-const paragraph = "The quick brown fox jumps over the lazy dog";
-
-export default function TypingBox({ onComplete, startTimer }) {
-  const [text, setText] = useState('');
-  const [isTypingStarted, setIsTypingStarted] = useState(false);
+const TypingBox = ({ onComplete, startTimer, referenceText }) => {
+  const [input, setInput] = useState('');
 
   useEffect(() => {
-    if (text.length === 1 && !isTypingStarted) {
-      setIsTypingStarted(true);
-      startTimer();
+    if (input.length === 1) startTimer();
+    if (input.length >= referenceText.length) {
+      onComplete(input);
     }
-    if (text === paragraph) onComplete(text);
-  }, [text]);
+  }, [input, referenceText.length, onComplete, startTimer]);
 
   return (
-    <div>
-      <p>{paragraph}</p>
+    <div className="typing-box">
+      <p className="reference-text">{referenceText}</p>
+      <br></br>
       <textarea
-        rows="4"
-        cols="50"
-        value={text}
-        onChange={e => setText(e.target.value)}
         placeholder="Start typing here..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        rows={5}
+        cols={60}
+        autoFocus
       />
     </div>
   );
-}
+};
+
+export default TypingBox;

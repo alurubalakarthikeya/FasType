@@ -18,7 +18,7 @@ export default function Timer({ start, onTimeEnd, duration = 60 }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [start]);
+  }, [start, onTimeEnd]);
 
   return <h2>Time: {time}s</h2>;
 }
